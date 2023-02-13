@@ -7,17 +7,20 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../store";
-import { AuthForm } from "./AuthForm";
+import { MyAlert } from "../MyAlert";
+import { AuthForm1 } from "./AuthForm1";
 
-export function Register() {
+export function Register1() {
   const auth = getAuth();
   const navigate = useNavigate();
   const { isVerification } = useAppSelector((state) => state.auth);
   const [sentVerification, setSentVerification] = useState(false);
+  const [massageError, setMassageError] = useState("");
 
   useEffect(() => {
     if (isVerification && sentVerification) {
       setSentVerification(false);
+      console.log("navigate()");
     }
   }, [isVerification, navigate, sentVerification]);
 
@@ -30,27 +33,23 @@ export function Register() {
           });
       })
       .catch((error) => {
-        alert(error.code);
+        setMassageError(error.code);
       });
   };
 
+  console.log("render Register");
+
   return (
-    <div className="container justify-content-center">
-      {sentVerification && (
-        <>
-          <div className="text-success text-center ">
-            На вашу почту отправлено письмо с подтверждением. <br />
-            Подтвердите письмо на почте и перезагрузите страницу.
-          </div>
-        </>
-      )}
-      <AuthForm
-        title="Зарегистрироваться"
+    <>
+      {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
+      <AuthForm1
+        title="Регистрация"
         handleClick={handleRegister}
         subtitle={"Уже зарегистрированы?"}
         link={"/login"}
-        linkTitle={"Войти"}
+        btnTitle={"Зарегистрироваться"}
+        placeholder="Придумайте пароль"
       />
-    </div>
+    </>
   );
 }

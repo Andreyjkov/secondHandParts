@@ -1,3 +1,10 @@
+/* spinner */
+.spinner {
+  height: calc(100% - 56px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* auth */
 .Auth-form-container {
   display: flex;

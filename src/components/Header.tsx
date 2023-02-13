@@ -19,7 +19,7 @@ export function Header() {
           <Nav className="me-auto">
             <NavLink
               to="/profile"
-              className={(isActive) =>
+              className={({ isActive }) =>
                 isActive ? "active nav-link" : "nav-link"
               }
             >

@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import { LoginPage } from "./pages/LoginPage";
 import { MainPage } from "./pages/MainPage";
 import { RegisterPage } from "./pages/RegisterPage";
-import { useAppDispatch } from "./store";
-import { setIsAuth } from "./store/sliceAuth";
+import { useAppDispatch} from "./store";
+import { setIsAuth, setIsVerification } from "./store/sliceAuth";
 import { setUser } from "./store/sliceUser";
 import { Layout } from "./components/Layout";
 import { AboutPage } from "./pages/AboutPage";
@@ -15,6 +15,7 @@ import { Unregistered } from "./hoc/Unregistered";
 import { ProfilePage } from "./pages/ProfilePage";
 import "./App.css";
 import { PageNotFound } from "./pages/PageNotFound";
+import { setIsLoading } from "./store/sliceApp";
 
 function App() {
   const auth = getAuth();
@@ -25,9 +26,12 @@ function App() {
       if (user && auth.currentUser?.emailVerified) {
         dispatch(setIsAuth(true));
         dispatch(setUser(user.email));
+        dispatch(setIsVerification(auth.currentUser?.emailVerified));
+        dispatch(setIsLoading(false));
       } else {
         dispatch(setIsAuth(false));
         dispatch(setUser(null));
+        dispatch(setIsLoading(false));
       }
     });
   }, [auth, dispatch]);

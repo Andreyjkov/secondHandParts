@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
 import { MyAlert } from "../MyAlert";
-import { AuthForm } from "./AuthForm";
+import { AuthForm1 } from "./AuthForm1";
 
-export function Login() {
+export function Login1() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -17,7 +17,6 @@ export function Login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         dispatch(setIsAuth(true));
-        alert(`Success ${user.email} Login`);
         navigate("/");
       })
       .catch((error) => {
@@ -27,13 +26,14 @@ export function Login() {
 
   return (
     <>
-      {massageError && <MyAlert title={'Error'} subTitle={massageError} />}
-      <AuthForm
+      {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
+      <AuthForm1
         title="Войти"
         handleClick={handleLogin}
         subtitle={"Еще не зарегистрированы?"}
-        linkTitle={"Зарегистрироваться"}
+        btnTitle={"Войти"}
         link={"/register"}
+        placeholder={'Пароль'}
       />
     </>
   );

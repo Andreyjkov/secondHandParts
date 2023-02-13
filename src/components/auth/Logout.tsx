@@ -1,7 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store";
-import { setIsAuth } from "../../store/sliceAuth";
+import { setIsAuth, setIsVerification } from "../../store/sliceAuth";
 import { setUser } from "../../store/sliceUser";
 
 export function LogOut() {
@@ -12,6 +12,7 @@ export function LogOut() {
     signOut(auth)
       .then(() => {
         dispatch(setIsAuth(false));
+        dispatch(setIsVerification(false));
         dispatch(setUser(null));
       })
       .catch((error) => {
