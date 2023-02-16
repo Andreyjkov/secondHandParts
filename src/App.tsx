@@ -10,12 +10,12 @@ import { About } from "./pages";
 import { useAppDispatch } from "./store";
 import { setIsAuth, setIsVerification } from "./store/sliceAuth";
 import { setUser } from "./store/sliceUser";
-import { Layout } from "./components/Layout";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { Unregistered } from "./hoc/Unregistered";
 import "./App.css";
 import { NotFound } from "./pages";
 import { setIsLoading } from "./store/sliceApp";
+import { Layout } from "./components";
 
 function App() {
   const auth = getAuth();

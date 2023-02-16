@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../store";
 import AuthForm from "./AuthForm";
 
-export function Register() {
+function Register() {
   const auth = getAuth();
   const navigate = useNavigate();
   const { isVerification } = useAppSelector((state) => state.auth);
@@ -35,22 +35,14 @@ export function Register() {
   };
 
   return (
-    <div className="container justify-content-center">
-      {sentVerification && (
-        <>
-          <div className="text-success text-center ">
-            На вашу почту отправлено письмо с подтверждением. <br />
-            Подтвердите письмо на почте и перезагрузите страницу.
-          </div>
-        </>
-      )}
-      <AuthForm
-        title="Зарегистрироваться"
-        handleClick={handleRegister}
-        subtitle={"Уже зарегистрированы?"}
-        link={"/login"}
-        linkTitle={"Войти"}
-      />
-    </div>
+    <AuthForm
+      title="Зарегистрироваться"
+      handleClick={handleRegister}
+      subtitle={"Уже зарегистрированы?"}
+      link={"/login"}
+      linkTitle={"Войти"}
+    />
   );
 }
+
+export default Register;

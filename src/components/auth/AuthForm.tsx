@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import styles from "./Auth.module.css";
 
 interface IForm {
   title: string;
@@ -14,11 +15,11 @@ function AuthForm({ title, subtitle, link, linkTitle, handleClick }: IForm) {
   const [pass, setPass] = useState("");
 
   return (
-    <div className="Auth-form-container px-3">
-      <div className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">{title}</h3>
-          <div className="form-group mt-3">
+    <div className={styles['form-container']}>
+      <div className={styles.form}>
+        <div className={styles['form-content']}>
+          <h3 className={styles['form-title']}>{title}</h3>
+          <div className={styles['form-group']}>
             <label>Email address</label>
             <input
               value={email}
@@ -28,7 +29,7 @@ function AuthForm({ title, subtitle, link, linkTitle, handleClick }: IForm) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="form-group mt-3">
+          <div className={styles['form-group']}>
             <label>Password</label>
             <input
               value={pass}
@@ -47,9 +48,8 @@ function AuthForm({ title, subtitle, link, linkTitle, handleClick }: IForm) {
               Submit
             </button>
             <p>
-              {subtitle}{" "}
+              {subtitle}
               <Link to={link} className="">
-                {" "}
                 {linkTitle}
               </Link>
             </p>

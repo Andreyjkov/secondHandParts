@@ -1,11 +1,10 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthForm } from "../";
 
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
-import { MyAlert } from "../MyAlert";
-import AuthForm from "./AuthForm";
 
 function Login() {
   const auth = getAuth();
@@ -27,7 +26,7 @@ function Login() {
 
   return (
     <>
-      {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
+      {/* {massageError && <MyAlert title={"Error"} subTitle={massageError} />} */}
       <AuthForm
         title="Войти"
         handleClick={handleLogin}
