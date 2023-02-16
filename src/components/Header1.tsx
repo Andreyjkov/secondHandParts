@@ -2,11 +2,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
+import { AuthSidebar, LogOut } from "./";
 import { useAppSelector } from "../store";
-import { LogOut } from "./auth/Logout";
-import { AuthSidebar } from "./auth/AuthSidebar";
 
-export function Header1() {
+
+function Header1() {
   const { isAuth } = useAppSelector((state) => state.auth);
 
   return (
@@ -54,3 +54,5 @@ export function Header1() {
     </Navbar>
   );
 }
+
+export default Header1;

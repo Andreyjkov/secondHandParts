@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../store";
 import { setIsAuth, setIsVerification } from "../../store/sliceAuth";
 import { setUser } from "../../store/sliceUser";
 
-export function LogOut() {
+function LogOut() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
 
@@ -30,3 +30,5 @@ export function LogOut() {
     </NavLink>
   );
 }
+
+export default LogOut;

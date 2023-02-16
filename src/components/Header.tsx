@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
 import { useAppSelector } from "../store";
-import { LogOut } from "./auth/Logout";
+import LogOut from "./auth/Logout";
 
 export function Header() {
   const { isAuth } = useAppSelector((state) => state.auth);

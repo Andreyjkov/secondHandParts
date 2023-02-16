@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAppSelector } from "../../store";
-import { AuthForm } from "./AuthForm";
+import AuthForm from "./AuthForm";
 
 export function Register() {
   const auth = getAuth();

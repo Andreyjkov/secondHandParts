@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Login1 } from "./Login1";
 import { Register1 } from "./Register1";
 
-export function AuthSidebar() {
+function AuthSidebar() {
   const [show, setShow] = useState(false);
   const [regOrLogin, setRegOrLogin] = useState(false);
 
@@ -13,7 +13,7 @@ export function AuthSidebar() {
   const handleShow = () => setShow(true);
   const handleRegOrLogin = () => setRegOrLogin(!regOrLogin);
 
-  console.log('show', show)
+  console.log("show", show);
 
   return (
     <>
@@ -48,3 +48,5 @@ export function AuthSidebar() {
     </>
   );
 }
+
+export default AuthSidebar;

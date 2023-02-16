@@ -1,20 +1,20 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { LoginPage } from "./pages/LoginPage";
-import { MainPage } from "./pages/MainPage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { useAppDispatch} from "./store";
+import { LoginPage } from "./pages";
+import { RegisterPage } from "./pages";
+import { Main } from "./pages";
+import { Profile } from "./pages";
+import { Blog } from "./pages";
+import { About } from "./pages";
+import { useAppDispatch } from "./store";
 import { setIsAuth, setIsVerification } from "./store/sliceAuth";
 import { setUser } from "./store/sliceUser";
 import { Layout } from "./components/Layout";
-import { AboutPage } from "./pages/AboutPage";
-import { BlogPage } from "./pages/BlogPage";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { Unregistered } from "./hoc/Unregistered";
-import { ProfilePage } from "./pages/ProfilePage";
 import "./App.css";
-import { PageNotFound } from "./pages/PageNotFound";
+import { NotFound } from "./pages";
 import { setIsLoading } from "./store/sliceApp";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<MainPage />} />
+          <Route index element={<Main />} />
           <Route
             path="login"
             element={
@@ -61,7 +61,7 @@ function App() {
             path="about"
             element={
               <RequireAuth>
-                <AboutPage />
+                <About />
               </RequireAuth>
             }
           />
@@ -69,7 +69,7 @@ function App() {
             path="blog"
             element={
               <RequireAuth>
-                <BlogPage />
+                <Blog />
               </RequireAuth>
             }
           />
@@ -77,11 +77,11 @@ function App() {
             path="profile"
             element={
               <RequireAuth>
-                <ProfilePage />
+                <Profile />
               </RequireAuth>
             }
           />
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>

@@ -13,7 +13,7 @@ interface IForm {
 //   props: IForm;
 // }
 
-export function AuthForm1({
+function AuthForm1({
   title,
   subtitle,
   link,
@@ -63,3 +63,5 @@ export function AuthForm1({
     </>
   );
 }
+
+export default AuthForm1;

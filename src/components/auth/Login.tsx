@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
 import { MyAlert } from "../MyAlert";
-import { AuthForm } from "./AuthForm";
+import AuthForm from "./AuthForm";
 
-export function Login() {
+function Login() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export function Login() {
 
   return (
     <>
-      {massageError && <MyAlert title={'Error'} subTitle={massageError} />}
+      {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
       <AuthForm
         title="Войти"
         handleClick={handleLogin}
@@ -38,3 +38,5 @@ export function Login() {
     </>
   );
 }
+
+export default Login;

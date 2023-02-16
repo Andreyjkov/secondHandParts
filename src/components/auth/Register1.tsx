@@ -5,10 +5,11 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthForm1 } from "../";
 
 import { useAppSelector } from "../../store";
 import { MyAlert } from "../MyAlert";
-import { AuthForm1 } from "./AuthForm1";
+
 
 export function Register1() {
   const auth = getAuth();
@@ -53,3 +54,5 @@ export function Register1() {
     </>
   );
 }
+
+export default Register1;

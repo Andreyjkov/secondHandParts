@@ -1,4 +1,4 @@
-export function Spinner() {
+function Spinner() {
   return (
     <>
       <div className="spinner">
@@ -7,3 +7,5 @@ export function Spinner() {
     </>
   );
 }
+
+export default Spinner;

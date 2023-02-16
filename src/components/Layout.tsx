@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
+import { Header1, Spinner } from "./";
 import { useAppSelector } from "../store";
 import { Header } from "./Header";
-import { Header1 } from "./Header1";
-import { Spinner } from "./Spinner";
 
 export function Layout() {
   const { isLoading } = useAppSelector((state) => state.app);

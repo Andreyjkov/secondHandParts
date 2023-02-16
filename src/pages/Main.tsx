@@ -1,6 +1,6 @@
 import { useAppSelector } from "../store";
 
-export function MainPage() {
+function Main() {
   const { email } = useAppSelector((state) => state.user);
 
   return (
@@ -11,3 +11,5 @@ export function MainPage() {
     </div>
   );
 }
+
+export default Main;

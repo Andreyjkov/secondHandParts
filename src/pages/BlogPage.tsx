@@ -1,3 +1,0 @@
-export function BlogPage() {
-  return <h1>BlogPage</h1>;
-}

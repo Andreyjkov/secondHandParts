@@ -9,13 +9,7 @@ interface IForm {
   handleClick: (email: string, password: string) => void;
 }
 
-export function AuthForm({
-  title,
-  subtitle,
-  link,
-  linkTitle,
-  handleClick,
-}: IForm) {
+function AuthForm({ title, subtitle, link, linkTitle, handleClick }: IForm) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
@@ -65,3 +59,5 @@ export function AuthForm({
     </div>
   );
 }
+
+export default AuthForm;

@@ -1,11 +1,11 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthForm1 } from "../";
 
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
 import { MyAlert } from "../MyAlert";
-import { AuthForm1 } from "./AuthForm1";
 
 export function Login1() {
   const auth = getAuth();
@@ -33,8 +33,10 @@ export function Login1() {
         subtitle={"Еще не зарегистрированы?"}
         btnTitle={"Войти"}
         link={"/register"}
-        placeholder={'Пароль'}
+        placeholder={"Пароль"}
       />
     </>
   );
 }
+
+export default Login1;
