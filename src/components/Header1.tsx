@@ -5,9 +5,12 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthSidebar, LogOut } from "./";
 import { useAppSelector } from "../store";
 
-
 function Header1() {
   const { isAuth } = useAppSelector((state) => state.auth);
+
+  const styleNavLink = (isActive: boolean) => {
+    return isActive ? "active nav-link" : "nav-link";
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -22,25 +25,19 @@ function Header1() {
               <>
                 <NavLink
                   to="/profile"
-                  className={({ isActive }) =>
-                    isActive ? "active nav-link" : "nav-link"
-                  }
+                  className={({ isActive }) => styleNavLink(isActive)}
                 >
                   Profile
                 </NavLink>
                 <NavLink
                   to="/about"
-                  className={({ isActive }) =>
-                    isActive ? "active nav-link" : "nav-link"
-                  }
+                  className={({ isActive }) => styleNavLink(isActive)}
                 >
-                  About
+                  Добавить
                 </NavLink>
                 <NavLink
                   to="/blog"
-                  className={({ isActive }) =>
-                    isActive ? "active nav-link" : "nav-link"
-                  }
+                  className={({ isActive }) => styleNavLink(isActive)}
                 >
                   Blog
                 </NavLink>

@@ -1,5 +1,6 @@
 import { getAuth, signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
+import { ImExit } from 'react-icons/im';
 import { useAppDispatch } from "../../store";
 import { setIsAuth, setIsVerification } from "../../store/sliceAuth";
 import { setUser } from "../../store/sliceUser";
@@ -26,7 +27,8 @@ function LogOut() {
       onClick={handleLogout}
       className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
     >
-      Выйти
+      <span>Выйти </span>
+      <ImExit />
     </NavLink>
   );
 }

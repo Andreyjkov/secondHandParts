@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ImEnter } from 'react-icons/im';
 import { Login1 } from "./Login1";
 import { Register1 } from "./Register1";
 
@@ -18,7 +19,9 @@ function AuthSidebar() {
   return (
     <>
       <Button variant="dark" onClick={handleShow}>
-        Войти
+        <ImEnter />
+        <span> Войти</span>
+        
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} placement="end">
