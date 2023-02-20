@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { setUserFirebase } from "../../services/dataUsers/setUserFirebase";
+import { setUserFirebase } from "../../services";
 import { useAppSelector } from "../../store";
 
 interface IProfileForm {

@@ -2,62 +2,67 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, NavLink } from "react-router-dom";
-import { useAppSelector } from "../store";
-import LogOut from "./Auth/Logout";
 
-export function Header() {
+import { AuthSidebar, LogOut } from "./";
+import { useAppSelector } from "../store";
+
+function Header() {
   const { isAuth } = useAppSelector((state) => state.auth);
+
+  const styleNavLink = (isActive: boolean) => {
+    return isActive ? "active nav-link" : "nav-link";
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link to="/" className="navbar-brand">
-          SecondHandParts
+          Second Hand Parts
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
-                isActive ? "active nav-link" : "nav-link"
-              }
-            >
-              Profile
-            </NavLink>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? "active nav-link" : "nav-link"
-              }
-            >
-              About
-            </NavLink>
-            <NavLink
-              to="/blog"
-              className={({ isActive }) =>
-                isActive ? "active nav-link" : "nav-link"
-              }
-            >
-              Blog
-            </NavLink>
-          </Nav>
-          <Nav>
             {isAuth ? (
-              <LogOut />
-            ) : (
-              <NavLink
-                to="/login"
-                className={({ isActive }) =>
-                  isActive ? "active nav-link" : "nav-link"
-                }
-              >
-                Войти
-              </NavLink>
-            )}
+              <>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                  about
+                </NavLink>
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                  Blog
+                </NavLink>
+                <NavLink
+                  to="/add-position"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                  Добавить позицию
+                </NavLink>
+                <NavLink
+                  to="/base"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                 Запчасти
+                </NavLink>
+              </>
+            ) : null}
           </Nav>
+
+          <Nav>{isAuth ? <LogOut /> : <AuthSidebar />}</Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
+
+export default Header;

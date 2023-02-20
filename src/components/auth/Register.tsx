@@ -5,52 +5,53 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { setUserFirebase } from "../../services";
 import { useAppSelector } from "../../store";
-import AuthForm from "./AuthForm";
+import { MyAlert } from "../MyAlert";
+import AuthForm, { IFormAuth } from "./AuthForm";
 
 export function Register() {
   const auth = getAuth();
   const navigate = useNavigate();
   const { isVerification } = useAppSelector((state) => state.auth);
   const [sentVerification, setSentVerification] = useState(false);
+  const [massageError, setMassageError] = useState("");
 
   useEffect(() => {
     if (isVerification && sentVerification) {
       setSentVerification(false);
+      console.log("navigate()");
     }
   }, [isVerification, navigate, sentVerification]);
 
-  const handleRegister = (email: string, password: string) => {
+  const handleRegister = ({ email, name, password, phone }: IFormAuth) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         auth.currentUser &&
           sendEmailVerification(auth.currentUser).then(() => {
+            setUserFirebase({ name, email, phone });
             setSentVerification(true);
           });
       })
       .catch((error) => {
-        alert(error.code);
+        setMassageError(error.code);
       });
   };
 
   return (
-    <div className="container justify-content-center">
-      {sentVerification && (
-        <>
-          <div className="text-success text-center ">
-            На вашу почту отправлено письмо с подтверждением. <br />
-            Подтвердите письмо на почте и перезагрузите страницу.
-          </div>
-        </>
-      )}
+    <>
+      {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
       <AuthForm
-        title="Зарегистрироваться"
+        title="Регистрация"
         handleClick={handleRegister}
         subtitle={"Уже зарегистрированы?"}
         link={"/login"}
-        linkTitle={"Войти"}
+        btnTitle={"Зарегистрироваться"}
+        placeholder="Придумайте пароль"
+        isRegister={true}
       />
-    </div>
+    </>
   );
 }
+
+export default Register;

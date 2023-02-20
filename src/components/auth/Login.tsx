@@ -5,19 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
 import { MyAlert } from "../MyAlert";
-import AuthForm from "./AuthForm";
+import AuthForm, { IFormAuth } from "./AuthForm";
 
-function Login() {
+
+export function Login() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [massageError, setMassageError] = useState("");
 
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = ({ email, password }: IFormAuth) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+
         dispatch(setIsAuth(true));
-        alert(`Success ${user.email} Login`);
         navigate("/");
       })
       .catch((error) => {
@@ -32,8 +33,10 @@ function Login() {
         title="Войти"
         handleClick={handleLogin}
         subtitle={"Еще не зарегистрированы?"}
-        linkTitle={"Зарегистрироваться"}
+        btnTitle={"Войти"}
         link={"/register"}
+        placeholder={"Пароль"}
+        isRegister={false}
       />
     </>
   );

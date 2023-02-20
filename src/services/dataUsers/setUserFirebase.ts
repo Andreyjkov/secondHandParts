@@ -7,7 +7,7 @@ export interface IUserData {
   phone: string
 }
 
-export const setUserFirebase = async (userInfo: IUserData) => {
+const setUserFirebase = async (userInfo: IUserData) => {
   const data = {
     ...userInfo,
   }
@@ -18,3 +18,5 @@ export const setUserFirebase = async (userInfo: IUserData) => {
     console.error("Error adding document: ", e);
   }
 }
+
+export default setUserFirebase;

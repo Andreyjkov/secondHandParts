@@ -1,7 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { addDataFirebase } from "../../services/dataBase/addDataFirebase";
-import { getAllDataFirebase } from "../../services/dataBase/getAllDataFirebase";
 
+import { addDataFirebase, getAllDataFirebase } from "../../services";
 
 export interface IFormData {
   brand: string;

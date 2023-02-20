@@ -1,62 +1,109 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-interface IForm {
+export interface IFormAuth {
+  email: string;
+  password: string;
+  name: string;
+  phone: string;
+}
+
+interface IProps {
   title: string;
   subtitle: string;
   link: string;
-  linkTitle: string;
-  handleClick: (email: string, password: string) => void;
+  btnTitle: string;
+  placeholder: string;
+  isRegister: boolean;
+  handleClick: (formData: IFormAuth) => void;
 }
 
-function AuthForm({ title, subtitle, link, linkTitle, handleClick }: IForm) {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+
+function AuthForm({
+  title,
+  subtitle,
+  link,
+  placeholder,
+  btnTitle,
+  isRegister,
+  handleClick,
+}: IProps) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IFormAuth>();
+
+  const onSubmit = (formData: IFormAuth) => {
+    handleClick(formData);
+    reset();
+  };
 
   return (
-    <div className="Auth-form-container px-3">
-      <div className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">{title}</h3>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h3 className="Auth-form-title">{title}</h3>
+      {isRegister ? (
+        <>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label>Имя</label>
             <input
-              value={email}
-              type="email"
+              {...register("name", { required: true })}
               className="form-control mt-1"
-              placeholder="Enter email"
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Имя"
             />
+            {errors.password && (
+              <span className="text-danger">Поле должно быть заполнено</span>
+            )}
           </div>
           <div className="form-group mt-3">
-            <label>Password</label>
+            <label>Телефон</label>
             <input
-              value={pass}
-              type="password"
+              {...register("phone", { required: true })}
               className="form-control mt-1"
-              placeholder="Enter password"
-              onChange={(e) => setPass(e.target.value)}
+              placeholder="+375 29 x-xxx-xxx"
             />
+            {errors.phone && (
+              <span className="text-danger">Поле должно быть заполнено</span>
+            )}
           </div>
-          <div className="d-grid gap-2 mt-3">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={() => handleClick(email, pass)}
-            >
-              Submit
-            </button>
-            <p>
-              {subtitle}{" "}
-              <Link to={link} className="">
-                {" "}
-                {linkTitle}
-              </Link>
-            </p>
-          </div>
-        </div>
+        </>
+      ) : null}
+
+      <div className="form-group mt-3">
+        <label>Электронная почта</label>
+        <input
+          {...register("email", { required: true })}
+          className="form-control mt-1"
+          placeholder="Адрес электронной почты"
+        />
+        {errors.email && (
+          <span className="text-danger">Поле должно быть заполнено</span>
+        )}
       </div>
-    </div>
+
+      <div className="form-group mt-3">
+        <label>Пароль</label>
+        <input
+          {...register("password", { required: true })}
+          className="form-control mt-1"
+          placeholder={placeholder}
+        />
+        {errors.password && (
+          <span className="text-danger">Поле должно быть заполнено</span>
+        )}
+      </div>
+
+      <div className="d-grid gap-2 mt-3">
+        <button type="submit" className="btn btn-primary">
+          {btnTitle}
+        </button>
+        <p>
+          {subtitle}
+          <Link to={link}></Link>
+        </p>
+      </div>
+    </form>
   );
 }
 

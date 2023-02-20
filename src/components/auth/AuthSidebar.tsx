@@ -1,10 +1,10 @@
-import * as React from "react";
 import { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ImEnter } from 'react-icons/im';
-import { Login1 } from "./Login1";
-import { Register1 } from "./Register1";
+import { ImEnter } from "react-icons/im";
+
+import { Login } from "./Login";
+import { Register } from "./Register";
 
 function AuthSidebar() {
   const [show, setShow] = useState(false);
@@ -19,26 +19,23 @@ function AuthSidebar() {
       <Button variant="dark" onClick={handleShow}>
         <ImEnter />
         <span> Войти</span>
-        
       </Button>
 
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-            {/* {regOrLogin ? "Зарегистрироваться" : "Войти"} */}
-          </Offcanvas.Title>
+          <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {regOrLogin ? (
             <>
-              <Register1 />
+              <Register />
               <Link to="#" onClick={handleRegOrLogin}>
                 Вход
               </Link>
             </>
           ) : (
             <>
-              <Login1 />
+              <Login />
               <Link to="#" onClick={handleRegOrLogin}>
                 Регистрация
               </Link>

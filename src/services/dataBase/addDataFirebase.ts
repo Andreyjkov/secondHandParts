@@ -4,7 +4,7 @@ import { IFormData } from "../../components/AddPositionForm/AddPositionForm";
 import { db } from "../../firebase";
 
 
-export const addDataFirebase = async (formData: IFormData) => {
+const addDataFirebase = async (formData: IFormData) => {
   const auth = getAuth();
   const email = auth.currentUser?.email
 
@@ -24,3 +24,5 @@ export const addDataFirebase = async (formData: IFormData) => {
     console.error("Error adding document: ", e);
   }
 }
+
+export default addDataFirebase;

@@ -5,7 +5,7 @@ import { db } from "../../firebase";
 
 
 
-export const setDataFirebase = async (formData: IFormData) => {
+const setDataFirebase = async (formData: IFormData) => {
     const auth = getAuth();
     const email = auth.currentUser?.email
 
@@ -23,3 +23,5 @@ export const setDataFirebase = async (formData: IFormData) => {
         console.error("Error adding document: ", e);
     }
 }
+
+export default setDataFirebase;

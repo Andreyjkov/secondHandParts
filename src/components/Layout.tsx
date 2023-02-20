@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
-import { Header1, Spinner } from "./";
 import { useAppSelector } from "../store";
-import { Header } from "./Header";
+import Header from "./Header";
+import Spinner from "./Spinner";
 
-export function Layout() {
+function Layout() {
   const { isLoading } = useAppSelector((state) => state.app);
   return (
     <>
-      {/* <Header /> */}
-      <Header1 />
+      <Header />
       {isLoading ? <Spinner /> : <Outlet />}
     </>
   );
 }
+
+export default Layout;

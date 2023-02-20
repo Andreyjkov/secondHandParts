@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+
 import { Spinner } from "../components";
-import { getAllDataFirebase } from "../services/dataBase/getAllDataFirebase";
+import { getAllDataFirebase } from "../services";
 
 import { useAppDispatch, useAppSelector } from "../store";
 import { setBase } from "../store/sliceBase";
 
-function Base() {
+function BasePage() {
   const dispatch = useAppDispatch();
   const { base } = useAppSelector((state) => state.base);
 
@@ -48,4 +49,4 @@ function Base() {
   );
 }
 
-export default Base;
+export default BasePage;

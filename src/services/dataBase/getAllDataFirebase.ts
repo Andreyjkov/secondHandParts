@@ -13,7 +13,7 @@ export interface IBaseData {
   userOwn: string
 }
 
-export const getAllDataFirebase = async () => {
+const getAllDataFirebase = async () => {
   const querySnapshot = await getDocs(collection(db, 'base'));
 
   const baseArr: IBaseData[] = []
@@ -32,6 +32,7 @@ export const getAllDataFirebase = async () => {
     })
   });
 
-
   return baseArr
 }
+
+export default getAllDataFirebase;
