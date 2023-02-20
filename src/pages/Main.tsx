@@ -1,3 +1,4 @@
+import BaseForm from "../components/AddPositionForm/AddPositionForm";
 import { useAppSelector } from "../store";
 
 function Main() {

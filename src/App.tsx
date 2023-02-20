@@ -16,6 +16,9 @@ import { Unregistered } from "./hoc/Unregistered";
 import "./App.css";
 import { NotFound } from "./pages";
 import { setIsLoading } from "./store/sliceApp";
+import AddPosition from "./pages/AddPosition";
+import Base from "./pages/Base";
+
 
 function App() {
   const auth = getAuth();
@@ -66,10 +69,26 @@ function App() {
             }
           />
           <Route
+            path="add-position"
+            element={
+              <RequireAuth>
+                <AddPosition />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="blog"
             element={
               <RequireAuth>
                 <Blog />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="base"
+            element={
+              <RequireAuth>
+                <Base />
               </RequireAuth>
             }
           />

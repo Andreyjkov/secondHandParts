@@ -33,13 +33,25 @@ function Header1() {
                   to="/about"
                   className={({ isActive }) => styleNavLink(isActive)}
                 >
-                  Добавить
+                  about
                 </NavLink>
                 <NavLink
                   to="/blog"
                   className={({ isActive }) => styleNavLink(isActive)}
                 >
                   Blog
+                </NavLink>
+                <NavLink
+                  to="/add-position"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                  Добавить позицию
+                </NavLink>
+                <NavLink
+                  to="/base"
+                  className={({ isActive }) => styleNavLink(isActive)}
+                >
+                 Запчасти
                 </NavLink>
               </>
             ) : null}
