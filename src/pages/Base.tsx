@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Spinner } from "../components";
-import { getAllDataFirebase } from "../services/firebase/getAllDataFirebase";
+import { getAllDataFirebase } from "../services/dataBase/getAllDataFirebase";
+
 import { useAppDispatch, useAppSelector } from "../store";
 import { setBase } from "../store/sliceBase";
 

@@ -4,6 +4,7 @@ import { IFormData } from "../../components/AddPositionForm/AddPositionForm";
 import { db } from "../../firebase";
 
 
+
 export const setDataFirebase = async (formData: IFormData) => {
     const auth = getAuth();
     const email = auth.currentUser?.email

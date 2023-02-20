@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { addDataFirebase } from "../../services/firebase/addDataFirebase";
-import { getAllDataFirebase } from "../../services/firebase/getAllDataFirebase";
-import { getDataFirebase } from "../../services/firebase/getDataFirebase";
+import { addDataFirebase } from "../../services/dataBase/addDataFirebase";
+import { getAllDataFirebase } from "../../services/dataBase/getAllDataFirebase";
+
 
 export interface IFormData {
   brand: string;
@@ -89,7 +89,6 @@ function AddPositionForm() {
           type="submit"
           value={"СФОРМИРОВАТЬ ПОЗИЦИЮ"}
           className="btn btn-primary"
-          // onClick={() => reset()}
         />
       </form>
       <button
