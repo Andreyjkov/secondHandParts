@@ -10,7 +10,7 @@ export function RequireAuth({ children }: RequireAuthProps) {
   const { isAuth } = useAppSelector((state) => state.auth);
 
   if (!isAuth) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/" state={{ from: location }} />;
   }
 
   return children;

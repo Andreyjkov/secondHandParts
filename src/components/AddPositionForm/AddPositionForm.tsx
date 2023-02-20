@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import { addDataFirebase, getAllDataFirebase } from "../../services";
+import { addDataFirebase } from "../../services";
 
 export interface IFormData {
   brand: string;
@@ -90,12 +90,6 @@ function AddPositionForm() {
           className="btn btn-primary"
         />
       </form>
-      <button
-        onClick={getAllDataFirebase}
-        className="btn btn-primary mt-5"
-      >
-        Получить данные
-      </button>
     </>
   );
 }

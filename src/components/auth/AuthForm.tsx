@@ -18,7 +18,6 @@ interface IProps {
   handleClick: (formData: IFormAuth) => void;
 }
 
-
 function AuthForm({
   title,
   subtitle,
@@ -85,6 +84,7 @@ function AuthForm({
       <div className="form-group mt-3">
         <label>Пароль</label>
         <input
+          type="password"
           {...register("password", { required: true })}
           className="form-control mt-1"
           placeholder={placeholder}

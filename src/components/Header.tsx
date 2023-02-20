@@ -28,19 +28,7 @@ function Header() {
                   to="/profile"
                   className={({ isActive }) => styleNavLink(isActive)}
                 >
-                  Profile
-                </NavLink>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) => styleNavLink(isActive)}
-                >
-                  about
-                </NavLink>
-                <NavLink
-                  to="/blog"
-                  className={({ isActive }) => styleNavLink(isActive)}
-                >
-                  Blog
+                  Профиль
                 </NavLink>
                 <NavLink
                   to="/add-position"

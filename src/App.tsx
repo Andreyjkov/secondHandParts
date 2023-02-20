@@ -5,8 +5,6 @@ import { Route, Routes } from "react-router-dom";
 import {
   MainPage,
   ProfilePage,
-  BlogPage,
-  AboutPage,
   NotFound,
   BasePage,
   AddPosition,
@@ -54,26 +52,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route
-            path="about"
-            element={
-              <RequireAuth>
-                <AboutPage />
-              </RequireAuth>
-            }
-          />
-          <Route
             path="add-position"
             element={
               <RequireAuth>
                 <AddPosition />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="blog"
-            element={
-              <RequireAuth>
-                <BlogPage />
               </RequireAuth>
             }
           />
