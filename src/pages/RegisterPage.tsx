@@ -1,5 +1,4 @@
-import * as React from "react";
-import { Register } from "../components/auth/Register";
+import { Register } from "../components/Auth/Register";
 
 function RegisterPage() {
   return <Register />;

@@ -14,7 +14,7 @@ function AuthSidebar() {
   const handleShow = () => setShow(true);
   const handleRegOrLogin = () => setRegOrLogin(!regOrLogin);
 
-  console.log("show", show);
+  // console.log("show", show);
 
   return (
     <>
