@@ -1,9 +1,9 @@
 import { getAuth, signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
-import { ImExit } from 'react-icons/im';
+import { ImExit } from "react-icons/im";
 import { useAppDispatch } from "../../store";
 import { setIsAuth, setIsVerification } from "../../store/sliceAuth";
-import { setUser } from "../../store/sliceUser";
+import { removeUser } from "../../store/sliceUser";
 
 function LogOut() {
   const auth = getAuth();
@@ -14,7 +14,7 @@ function LogOut() {
       .then(() => {
         dispatch(setIsAuth(false));
         dispatch(setIsVerification(false));
-        dispatch(setUser(null));
+        dispatch(removeUser());
       })
       .catch((error) => {
         console.log(error);

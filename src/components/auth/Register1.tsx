@@ -5,11 +5,10 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthForm1 } from "../";
-
+import { setUserFirebase } from "../../services/dataUsers/setUserFirebase";
 import { useAppSelector } from "../../store";
 import { MyAlert } from "../MyAlert";
-
+import AuthForm2, { IFormAuth } from "./AuthForm2";
 
 export function Register1() {
   const auth = getAuth();
@@ -25,11 +24,12 @@ export function Register1() {
     }
   }, [isVerification, navigate, sentVerification]);
 
-  const handleRegister = (email: string, password: string) => {
+  const handleRegister = ({ email, name, password, phone }: IFormAuth) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         auth.currentUser &&
           sendEmailVerification(auth.currentUser).then(() => {
+            setUserFirebase({ name, email, phone });
             setSentVerification(true);
           });
       })
@@ -38,18 +38,17 @@ export function Register1() {
       });
   };
 
-  console.log("render Register");
-
   return (
     <>
       {massageError && <MyAlert title={"Error"} subTitle={massageError} />}
-      <AuthForm1
+      <AuthForm2
         title="Регистрация"
         handleClick={handleRegister}
         subtitle={"Уже зарегистрированы?"}
         link={"/login"}
         btnTitle={"Зарегистрироваться"}
         placeholder="Придумайте пароль"
+        isRegister={true}
       />
     </>
   );

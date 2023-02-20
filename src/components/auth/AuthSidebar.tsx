@@ -14,8 +14,6 @@ function AuthSidebar() {
   const handleShow = () => setShow(true);
   const handleRegOrLogin = () => setRegOrLogin(!regOrLogin);
 
-  // console.log("show", show);
-
   return (
     <>
       <Button variant="dark" onClick={handleShow}>

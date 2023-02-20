@@ -1,24 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUserData } from '../services/dataUsers/setUserFirebase';
 
 const initialState = {
-  email: null,
-  // token: null,
-  // id: null,
+  email: '',
+  name: '',
+  phone: '',
 };
 
 const sliceUser = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action) {
-      state.email = action.payload;
-      // state.token = action.payload.token;
-      // state.id = action.payload.id;
+    setUser(state, action: PayloadAction<IUserData>) {
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.phone = action.payload.phone;
     },
     removeUser(state) {
-      state.email = null;
-      // state.token = null;
-      // state.id = null;
+      state.email = '';
+      state.name = '';
+      state.phone = '';
     },
   },
 });

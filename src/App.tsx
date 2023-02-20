@@ -4,12 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import { LoginPage } from "./pages";
 import { RegisterPage } from "./pages";
 import { Main } from "./pages";
-import { Profile } from "./pages";
+import { ProfilePage } from "./pages";
 import { Blog } from "./pages";
 import { About } from "./pages";
 import { useAppDispatch } from "./store";
 import { setIsAuth, setIsVerification } from "./store/sliceAuth";
-import { setUser } from "./store/sliceUser";
+import { removeUser, setUser } from "./store/sliceUser";
 import { Layout } from "./components/Layout";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { Unregistered } from "./hoc/Unregistered";
@@ -18,22 +18,26 @@ import { NotFound } from "./pages";
 import { setIsLoading } from "./store/sliceApp";
 import AddPosition from "./pages/AddPosition";
 import Base from "./pages/Base";
-
+import { getUserFirebase } from "./services/dataUsers/getUserFirebase";
+import { IUserData } from "./services/dataUsers/setUserFirebase";
 
 function App() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user && auth.currentUser?.emailVerified) {
-        dispatch(setIsAuth(true));
-        dispatch(setUser(user.email));
+    onAuthStateChanged(auth, async (user) => {
+
+      if (user && user.email && auth.currentUser?.emailVerified) {
+        const userData = (await getUserFirebase("users", user.email)) as IUserData;
+
+        dispatch(setUser(userData));
         dispatch(setIsVerification(auth.currentUser?.emailVerified));
         dispatch(setIsLoading(false));
+        dispatch(setIsAuth(true));
       } else {
         dispatch(setIsAuth(false));
-        dispatch(setUser(null));
+        // dispatch(removeUser());
         dispatch(setIsLoading(false));
       }
     });
@@ -96,7 +100,7 @@ function App() {
             path="profile"
             element={
               <RequireAuth>
-                <Profile />
+                <ProfilePage />
               </RequireAuth>
             }
           />
