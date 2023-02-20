@@ -24,7 +24,7 @@ function LogOut() {
 
   return (
     <NavLink
-      to="/login"
+      to="/"
       onClick={handleLogout}
       className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
     >

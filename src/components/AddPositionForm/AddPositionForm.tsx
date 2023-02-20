@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import { addDataFirebase } from "../../services";
+import { useAppSelector } from "../../store";
 
 export interface IFormData {
   brand: string;
@@ -10,13 +11,17 @@ export interface IFormData {
 }
 
 function AddPositionForm() {
+  const { name, phone, email } = useAppSelector((state) => state.user); // DO TO брать актуальные данные при просмотре подробной информации об таваре
+  //(если user изменит телефон или имя то даные тоже поменялись )
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<IFormData>();
-  const onSubmit: SubmitHandler<IFormData> = (data) => {
+
+  const onSubmit: SubmitHandler<IFormData> = (formData) => {
+    const data = { ...formData, name, phone, userOwn: email };
     addDataFirebase(data);
     reset();
   };

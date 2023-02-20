@@ -1,25 +1,22 @@
 import { getAuth } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { IFormData } from "../../components/AddPositionForm/AddPositionForm";
 import { db } from "../../firebase";
 
+interface IAddDataFirebase {
+  name: string;
+  phone: string;
+  userOwn: string;
+  brand: string;
+  model: string;
+  parts: string;
+  description: string;
+}
 
-const addDataFirebase = async (formData: IFormData) => {
-  const auth = getAuth();
-  const email = auth.currentUser?.email
-
-  const data = {
-    ...formData,
-    userOwn: email,
-    phone: '+375 29 ....',
-    name: 'Andrey',
-  }
-
-  console.log('data: ', data);
-
+const addDataFirebase = async (formData: IAddDataFirebase) => {
   try {
-    await addDoc(collection(db, "base"), data);
-    console.log("Document written with ID: "/* , docRef.id */);
+    await addDoc(collection(db, "base"), formData);
+    console.log("Document Add ");
   } catch (e) {
     console.error("Error adding document: ", e);
   }

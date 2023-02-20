@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { Spinner } from "../components";
+import InfoModal from "../components/ModalBaseInfo";
 import { getAllDataFirebase } from "../services";
+import { IBaseData } from "../services/dataBase/getAllDataFirebase";
 
 import { useAppDispatch, useAppSelector } from "../store";
 import { setBase } from "../store/sliceBase";
@@ -9,6 +11,9 @@ import { setBase } from "../store/sliceBase";
 function BasePage() {
   const dispatch = useAppDispatch();
   const { base } = useAppSelector((state) => state.base);
+
+  const [positionInfo, setPositionInfo] = useState<IBaseData>();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const dataBase = async () => {
@@ -18,7 +23,11 @@ function BasePage() {
     dataBase();
   }, [dispatch]);
 
-  console.log(base);
+  const handleDataInfo = (data: IBaseData) => {
+    setPositionInfo(data);
+    setShowModal(true);
+  };
+
   if (!base) return <Spinner />;
   return (
     <div className="container">
@@ -35,7 +44,11 @@ function BasePage() {
         <tbody>
           {base.map((el, i) => {
             return (
-              <tr className="" key={el.docId}>
+              <tr
+                className=""
+                key={el.docId}
+                onClick={() => handleDataInfo(el)}
+              >
                 <td className="">{el.brand}</td>
                 <td className="">{el.model}</td>
                 <td className="">{el.parts}</td>
@@ -45,6 +58,13 @@ function BasePage() {
           })}
         </tbody>
       </table>
+      {positionInfo && (
+        <InfoModal
+          props={positionInfo}
+          isShowModal={showModal}
+          setShowModal={setShowModal}
+        />
+      )}
     </div>
   );
 }
