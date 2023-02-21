@@ -12,8 +12,6 @@ const setDataFirebase = async (formData: IFormData) => {
     const data = {
         ...formData,
         userOwn: email,
-        phone: '+375 29...',
-        name: 'Andrey',
     }
 
     try {
