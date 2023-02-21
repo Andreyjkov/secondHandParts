@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { IBaseData } from "../services/dataBase/getAllDataFirebase";
+import { IBaseData } from "../../services/dataBase/getAllDataFirebase";
 
 interface Props {
   props: IBaseData;

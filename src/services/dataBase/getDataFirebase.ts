@@ -3,15 +3,14 @@ import { db } from "../../firebase";
 
 
 const getDataFirebase = async (collectionName: string, docId: string) => {
-  const docRef = doc(db, collectionName, docId);
-  const docSnap = await getDoc(docRef);
+  // const docRef = doc(db, collectionName, docId);
+  // const docSnap = await getDoc(docRef);
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  // if (docSnap.exists()) {
+  //   console.log("Document data:", docSnap.data());
+  // } else {
+  //   console.log("No such document!");
+  // }
 }
 
 export default getDataFirebase;

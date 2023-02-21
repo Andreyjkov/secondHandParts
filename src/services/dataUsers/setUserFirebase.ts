@@ -8,11 +8,11 @@ export interface IUserData {
 }
 
 const setUserFirebase = async (userInfo: IUserData) => {
-  const data = {
-    ...userInfo,
-  }
+  const docRef = doc(db, "users", userInfo.email)
+  const payload = { ...userInfo }
+
   try {
-    await setDoc(doc(db, "users", userInfo.email), data);
+    await setDoc(docRef, payload);
     console.log("Document written with ID: ");
   } catch (e) {
     console.error("Error adding document: ", e);
