@@ -1,10 +1,9 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { ChangeEvent, useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { setUserFirebase } from "../../services";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { setUser } from "../../store/sliceUser";
-import { MdEdit } from "react-icons/md";
 
 interface IProfileForm {
   name: string;
@@ -83,7 +82,8 @@ function ProfileUser() {
           <h6 className="mb-1">Почта</h6>
           <div className="col text-secondary">
             <span className="form-control">
-              {email} <span className="fst-italic"> - нельзя редактировать</span>
+              {email}{" "}
+              <span className="fst-italic"> - нельзя редактировать</span>
             </span>
           </div>
         </div>
