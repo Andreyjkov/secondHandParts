@@ -16,13 +16,11 @@ function Layout() {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.app);
   
-
   useEffect(() => {
     const dataBase = async () => {
       const data = await getAllDataFirebase();
       dispatch(setBase(data));
     };
-    dataBase();
 
     onAuthStateChanged(auth, async (user) => {
       if (user && user.email && auth.currentUser?.emailVerified) {
@@ -35,6 +33,7 @@ function Layout() {
         dispatch(setIsVerification(auth.currentUser?.emailVerified));
         dispatch(setIsLoading(false));
         dispatch(setIsAuth(true));
+        dataBase();
       } else {
         dispatch(setIsAuth(false));
         dispatch(setIsLoading(false));

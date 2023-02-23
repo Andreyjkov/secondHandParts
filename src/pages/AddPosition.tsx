@@ -1,4 +1,6 @@
 import { SubmitHandler } from "react-hook-form";
+import { ToastContainer } from "react-toastify";
+
 import { useAppDispatch, useAppSelector } from "../store";
 import { setIsLoading } from "../store/sliceApp";
 import { addBaseItem } from "../store/sliceBase";
@@ -29,6 +31,7 @@ function AddPosition() {
   return (
     <div className="container mt-5">
       <AddForm onSubmit={onSubmit} />
+      <ToastContainer />
     </div>
   );
 }

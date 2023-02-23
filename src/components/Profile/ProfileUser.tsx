@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
-
+import { ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
+
 import { setUserFirebase } from "../../services";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { setUser } from "../../store/sliceUser";
@@ -93,6 +94,7 @@ function ProfileUser() {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

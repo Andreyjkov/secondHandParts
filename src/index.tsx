@@ -6,20 +6,20 @@ import "./firebase";
 
 import App from "./App";
 import store from "./store";
+import "react-toastify/ReactToastify.min.css";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

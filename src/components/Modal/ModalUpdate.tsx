@@ -1,6 +1,7 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
+import { ToastContainer } from "react-toastify";
 import { db } from "../../firebase";
 import { IFormData } from "../../pages/AddPosition";
 import { deleteDocFirebase, updateDocFirebase } from "../../services";
@@ -63,6 +64,7 @@ function ModalUpdate({ props, isShowModal, setShowModal }: Props) {
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
+      <ToastContainer />
     </>
   );
 }
