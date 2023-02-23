@@ -12,6 +12,9 @@ const sliceBase = createSlice({
     setBase(state, action: PayloadAction<IBaseData[]>) {
       state.base = action.payload
     },
+    addBaseItem(state, action: PayloadAction<IBaseData>) {
+      state.base.push(action.payload)
+    },
     updataDocStore(state, action: PayloadAction<IBaseData>) {
       state.base?.forEach((item, i) => {
         if (item.docId === action.payload.docId) {
@@ -28,6 +31,6 @@ const sliceBase = createSlice({
   },
 });
 
-export const { setBase, updataDocStore, deleteDocStore } = sliceBase.actions;
+export const { setBase, addBaseItem, updataDocStore, deleteDocStore } = sliceBase.actions;
 
 export default sliceBase.reducer;

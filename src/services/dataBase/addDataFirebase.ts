@@ -15,8 +15,9 @@ const addDataFirebase = async (formData: IAddDataFirebase) => {
   const collectionRef = collection(db, "base")
   const payload = formData
   try {
-    await addDoc(collectionRef, payload);
+    const docRef = await addDoc(collectionRef, payload);
     console.log("Document Add ");
+    return docRef
   } catch (e) {
     console.error("Error adding document: ", e);
   }

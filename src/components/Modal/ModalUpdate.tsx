@@ -28,8 +28,6 @@ function ModalUpdate({ props, isShowModal, setShowModal }: Props) {
     const unsub = onSnapshot(docId, (doc) => {
       const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
 
-      console.log("source", source);
-      console.log("doc", doc);
       if (source === "Local") {
         const payload = { ...doc.data(), docId: doc.id } as IBaseData;
         dispatch(updataDocStore(payload));

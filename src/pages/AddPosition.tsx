@@ -1,7 +1,9 @@
 import { SubmitHandler } from "react-hook-form";
-import AddForm from "../components/Form/AddForm";
+import { useAppDispatch, useAppSelector } from "../store";
+import { setIsLoading } from "../store/sliceApp";
+import { addBaseItem } from "../store/sliceBase";
 import { addDataFirebase } from "../services";
-import { useAppSelector } from "../store";
+import AddForm from "../components/Form/AddForm";
 
 export interface IFormData {
   brand: string;
@@ -11,11 +13,17 @@ export interface IFormData {
 }
 
 function AddPosition() {
-  const { name, phone, email } = useAppSelector((state) => state.user); // DO TO брать актуальные данные при просмотре подробной информации об таваре
+  const dispatch = useAppDispatch();
+  const { name, phone, email } = useAppSelector((state) => state.user);
 
-  const onSubmit: SubmitHandler<IFormData> = (formData) => {
+  const onSubmit: SubmitHandler<IFormData> = async (formData) => {
+    dispatch(setIsLoading(true));
     const data = { ...formData, name, phone, userOwn: email };
-    addDataFirebase(data);
+    const docRef = await addDataFirebase(data);
+    if (docRef) {
+      dispatch(addBaseItem({ ...data, docId: docRef.id }));
+    }
+    dispatch(setIsLoading(false));
   };
 
   return (
@@ -26,4 +34,3 @@ function AddPosition() {
 }
 
 export default AddPosition;
-

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalUpdate from "../components/Modal/ModalUpdate";
 import ProfileUser from "../components/Profile/ProfileUser";
 import TableBase from "../components/TableBase";
@@ -7,12 +7,15 @@ import { useAppSelector } from "../store";
 
 function ProfilePage() {
   const { base } = useAppSelector((state) => state.base);
+  const { email } = useAppSelector((state) => state.user);
   const [showModal, setShowModal] = useState(false);
   const [product, setProduct] = useState<IBaseData>();
+  const [ownBase, setOwnBase] = useState<IBaseData[]>();
 
-  const ownData = () => {
-    // TO DO отфильтровать данные принадлежат данному юзеру
-  };
+  useEffect(() => {
+    const ownData = base.filter((item) => item.userOwn === email);
+    setOwnBase(ownData);
+  }, [base, email]);
 
   const handleDataInfo = (data: IBaseData) => {
     setProduct(data);
@@ -23,9 +26,11 @@ function ProfilePage() {
     <div className="container">
       <ProfileUser />
 
-      <div className="card mt-5">
+      <div className="card mt-5 pb-2">
         <h2 className="text-center">Изменить позиции</h2>
-        <TableBase base={base} handleDataInfo={handleDataInfo} />
+        {ownBase && (
+          <TableBase base={ownBase} handleDataInfo={handleDataInfo} />
+        )}
       </div>
 
       {product && (
