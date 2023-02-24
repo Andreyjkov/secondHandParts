@@ -1,16 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export interface IBaseData {
-  docId: string
-  brand: string;
-  description: string
-  model: string
-  name: string
-  parts: string
-  phone: string
-  userOwn: string
-}
+import { IBaseData } from "../../interface";
 
 const getAllDataFirebase = async () => {
   const querySnapshot = await getDocs(collection(db, 'base'));

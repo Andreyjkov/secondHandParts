@@ -10,3 +10,14 @@ export interface IUserData {
   name: string;
   phone: string
 }
+
+export interface IBaseData {
+  docId: string
+  brand: string;
+  description: string
+  model: string
+  name: string
+  parts: string
+  phone: string
+  userOwn: string
+}

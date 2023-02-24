@@ -1,5 +1,6 @@
 import { Table } from "react-bootstrap";
-import { IBaseData } from "../services/dataBase/getAllDataFirebase";
+
+import { IBaseData } from "../interface";
 
 interface ITableBase {
   base: IBaseData[];

@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Spinner } from "../components";
 import InfoModal from "../components/Modal/ModalBaseInfo";
 import TableBase from "../components/TableBase";
-import { IBaseData } from "../services/dataBase/getAllDataFirebase";
-
+import { IBaseData } from "../interface";
 import { useAppSelector } from "../store";
 
 function BasePage() {

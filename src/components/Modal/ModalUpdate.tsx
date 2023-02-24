@@ -3,9 +3,11 @@ import React, { useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import { ToastContainer } from "react-toastify";
 import { db } from "../../firebase";
+import { IBaseData } from "../../interface";
 import { IFormData } from "../../pages/AddPosition";
+
 import { deleteDocFirebase, updateDocFirebase } from "../../services";
-import { IBaseData } from "../../services/dataBase/getAllDataFirebase";
+
 
 import { useAppDispatch } from "../../store";
 import { deleteDocStore, updataDocStore } from "../../store/sliceBase";

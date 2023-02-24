@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBaseData } from '../services/dataBase/getAllDataFirebase';
+import { IBaseData } from '../interface';
 
 const initialState = {
   base: [] as IBaseData[]

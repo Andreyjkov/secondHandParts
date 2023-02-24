@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ModalUpdate from "../components/Modal/ModalUpdate";
 import ProfileUser from "../components/Profile/ProfileUser";
 import TableBase from "../components/TableBase";
-import { IBaseData } from "../services/dataBase/getAllDataFirebase";
 import { useAppSelector } from "../store";
+import { IBaseData } from "../interface";
 
 function ProfilePage() {
   const { base } = useAppSelector((state) => state.base);
