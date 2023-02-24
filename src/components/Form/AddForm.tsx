@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IFormData } from "../../pages/AddPosition";
 
-
 interface IAddForm {
   onSubmit: SubmitHandler<IFormData>;
 }
@@ -16,7 +15,7 @@ function AddForm({ onSubmit }: IAddForm) {
 
   const handleSubmitForm: SubmitHandler<IFormData> = (formData) => {
     onSubmit(formData);
-    reset()
+    reset();
   };
 
   return (
