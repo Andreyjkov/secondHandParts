@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserData } from '../services/dataUsers/setUserFirebase';
+import { IUserData } from '../interface';
+
 
 const initialState = {
   email: '',

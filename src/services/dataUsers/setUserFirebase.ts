@@ -1,12 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { db } from "../../firebase";
-
-export interface IUserData {
-  email: string;
-  name: string;
-  phone: string
-}
+import { IUserData } from "../../interface";
 
 const setUserFirebase = async (userInfo: IUserData) => {
   const docRef = doc(db, "users", userInfo.email)
@@ -15,7 +10,7 @@ const setUserFirebase = async (userInfo: IUserData) => {
   try {
     await setDoc(docRef, payload);
     console.log("Document written with ID: ");
-    toast.success('Данные изменены успешно!', {
+    toast.success('Успешно!', {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,

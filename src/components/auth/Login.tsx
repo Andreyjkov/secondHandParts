@@ -1,13 +1,32 @@
+import { Link } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import AuthForm, { IFormAuth } from "./AuthForm";
 
-export function Login() {
+import { IFormAuth } from "../../interface";
+import { useAppDispatch } from "../../store";
+import { setIsAuth } from "../../store/sliceAuth";
+
+
+interface ILogin {
+  handleFormSwitcher: () => void;
+}
+
+export function Login({ handleFormSwitcher }: ILogin) {
   const auth = getAuth();
+  const dispatch = useAppDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IFormAuth>();
 
   const handleLogin = ({ email, password }: IFormAuth) => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        dispatch(setIsAuth(true));
         toast.success("Вход выполнен успешно!", {
           position: "top-center",
           autoClose: 2000,
@@ -42,18 +61,50 @@ export function Login() {
       });
   };
 
+  const onSubmit = (formData: IFormAuth) => {
+    handleLogin(formData);
+    reset();
+  };
+
   return (
-    <>
-      <AuthForm
-        title="Войти"
-        handleClick={handleLogin}
-        subtitle={"Еще не зарегистрированы?"}
-        btnTitle={"Войти"}
-        link={"/register"}
-        placeholder={"Пароль"}
-        isRegister={false}
-      />
-    </>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h3 className="Auth-form-title">Войти</h3>
+      <div className="form-group mt-3">
+        <label>Электронная почта</label>
+        <input
+          {...register("email", { required: true })}
+          className="form-control mt-1"
+          placeholder="Адрес электронной почты"
+        />
+        {errors.email && (
+          <span className="text-danger">Поле должно быть заполнено</span>
+        )}
+      </div>
+      <div className="form-group mt-3">
+        <label>Пароль</label>
+        <input
+          type="password"
+          {...register("password", { required: true })}
+          className="form-control mt-1"
+          placeholder={"Пароль"}
+        />
+        {errors.password && (
+          <span className="text-danger">Поле должно быть заполнено</span>
+        )}
+      </div>
+
+      <div className="d-grid gap-2 mt-3">
+        <button type="submit" className="btn btn-primary">
+          Войти
+        </button>
+        <p>
+          Еще не зарегистрированы?{" "}
+          <Link to={"#"} onClick={handleFormSwitcher} className={"link"}>
+            Регистрация
+          </Link>
+        </p>
+      </div>
+    </form>
   );
 }
 

@@ -1,13 +1,14 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { getAllDataFirebase, getUserFirebase } from "../services";
-import { IUserData } from "../services/dataUsers/setUserFirebase";
+
 import { useAppDispatch, useAppSelector } from "../store";
 import { setIsLoading } from "../store/sliceApp";
-import { setIsAuth, setIsVerification } from "../store/sliceAuth";
+import { setIsAuth } from "../store/sliceAuth";
 import { setBase } from "../store/sliceBase";
 import { setUser } from "../store/sliceUser";
+import { IUserData } from "../interface";
+import { getAllDataFirebase, getUserFirebase } from "../services";
 import Header from "./Header";
 import Spinner from "./Spinner";
 
@@ -15,7 +16,8 @@ function Layout() {
   const auth = getAuth();
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.app);
-  
+  const { isVerification } = useAppSelector((state) => state.auth);
+
   useEffect(() => {
     const dataBase = async () => {
       const data = await getAllDataFirebase();
@@ -23,23 +25,20 @@ function Layout() {
     };
 
     onAuthStateChanged(auth, async (user) => {
-      if (user && user.email && auth.currentUser?.emailVerified) {
+      if (!user) return dispatch(setIsLoading(false));
+
+      if (user.email && (isVerification || user.emailVerified)) {
+        dispatch(setIsAuth(true));
+        await dataBase();
+        dispatch(setIsLoading(false));
         const userData = (await getUserFirebase(
           "users",
           user.email
         )) as IUserData;
-
         dispatch(setUser(userData));
-        dispatch(setIsVerification(auth.currentUser?.emailVerified));
-        dispatch(setIsLoading(false));
-        dispatch(setIsAuth(true));
-        dataBase();
-      } else {
-        dispatch(setIsAuth(false));
-        dispatch(setIsLoading(false));
       }
     });
-  }, [auth, dispatch]);
+  }, [auth, dispatch, isVerification]);
 
   return (
     <>

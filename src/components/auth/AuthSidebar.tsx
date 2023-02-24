@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { ImEnter } from "react-icons/im";
 
 import { Login } from "./Login";
@@ -8,11 +7,11 @@ import { Register } from "./Register";
 
 function AuthSidebar() {
   const [show, setShow] = useState(false);
-  const [regOrLogin, setRegOrLogin] = useState(false);
+  const [formSwitcher, setFormSwitcher] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const handleRegOrLogin = () => setRegOrLogin(!regOrLogin);
+  const handleFormSwitcher = () => setFormSwitcher(!formSwitcher);
 
   return (
     <>
@@ -26,19 +25,13 @@ function AuthSidebar() {
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {regOrLogin ? (
+          {formSwitcher ? (
             <>
-              <Register />
-              <Link to="#" onClick={handleRegOrLogin}>
-                Вход
-              </Link>
+              <Register handleFormSwitcher={handleFormSwitcher} />
             </>
           ) : (
             <>
-              <Login />
-              <Link to="#" onClick={handleRegOrLogin}>
-                Регистрация
-              </Link>
+              <Login handleFormSwitcher={handleFormSwitcher} />
             </>
           )}
         </Offcanvas.Body>

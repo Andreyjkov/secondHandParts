@@ -1,4 +1,3 @@
-export { default as AuthForm } from './Auth/AuthForm'
 export { default as Spinner } from './Spinner'
 export { default as AuthSidebar } from './Auth/AuthSidebar'
 export { default as Login } from './Auth/Login'
