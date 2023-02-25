@@ -38,6 +38,7 @@ export function Register({ handleFormSwitcher }: IRegister) {
           user.reload();
           autoVerification(user, userFormInfo);
         } else {
+          toast.dismiss();
           dispatch(setIsVerification(user.emailVerified));
           setUserFirebase(userFormInfo);
         }
@@ -48,6 +49,20 @@ export function Register({ handleFormSwitcher }: IRegister) {
       .then(({ user }) => {
         sendEmailVerification(user).then(() => {
           autoVerification(user, userFormInfo);
+
+          toast.info(
+            "Мы отправили Вам письмо. Пожалуйста, проверьте Вашу почту.",
+            {
+              position: "top-center",
+              autoClose: false,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
         });
       })
       .catch((error) => {
