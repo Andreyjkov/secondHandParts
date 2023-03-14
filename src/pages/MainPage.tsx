@@ -1,24 +1,49 @@
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { useAppSelector } from "../store";
 
 function MainPage() {
+  const { isAuth } = useAppSelector((state) => state.auth);
+  const { name } = useAppSelector((store) => store.user);
   return (
-    <div className="container">
-      <h2>Добро пожаловать в Second Hand Parts</h2>
-      <h4>Сервис находится на стадии разработки.</h4>
-      <span>
-        Для использования реализованных возможностей Вам нужно войти /
-        зарегистрироваться.
-      </span>
-      <p>Пока доступна возожности: </p>
-      <ul>
-        <li>Регистрация / Вход</li>
-        <li>Отображения всего списка товаров</li>
-        <li>Отображения информации выбранного товара</li>
-        <li>Создания позиции товара</li>
-        <li>Редактирование товара в профиле</li>
-        <li>Редактирование профиля</li>
-      </ul>
-      <ToastContainer />
+    <div className="wrapper">
+      <div className="container mt-5">
+        {isAuth ? (
+          <>
+            <h2>Привет {name}, Пока доступна возожности:</h2>
+            <ul>
+              <li>Регистрация / Вход</li>
+              <li>
+                <Link to={"/add-position"}>Создания позиции товара</Link>
+              </li>
+              <li>
+                <Link to={"/base"}>Отображения всего списка товаров</Link>
+              </li>
+              <li>Отображения информации выбранного товара</li>
+              <li>Редактирование товара в профиле</li>
+              <li>
+                <Link to={"/profile"}>Редактирование профиля</Link>
+              </li>
+            </ul>
+            <p>
+              Что бы вернутся на главную строницу просто нажмите на логотип
+              "Second Hand Parts"
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="text-center">
+              Добро пожаловать в Second Hand Parts
+            </h2>
+            <p className="text-center text-muted">
+              Сервис находится на стадии разработки. Для использования
+              реализованных возможностей Вам нужно войти / зарегистрироваться.
+            </p>
+          </>
+        )}
+
+        <ToastContainer />
+      </div>
     </div>
   );
 }

@@ -26,9 +26,12 @@ function AddPosition() {
   };
 
   return (
-    <div className="container mt-5">
-      <AddForm onSubmit={onSubmit} />
-      <ToastContainer />
+    <div className="wrapper">
+      <div className="container">
+        <h2 className="text-center">Добавить позицию</h2>
+        <AddForm onSubmit={onSubmit} />
+        <ToastContainer />
+      </div>
     </div>
   );
 }

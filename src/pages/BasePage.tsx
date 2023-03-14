@@ -19,16 +19,18 @@ function BasePage() {
 
   if (!base) return <Spinner />;
   return (
-    <div className="container">
-      <h2>Запчасти</h2>
-      <TableBase handleDataInfo={handleDataInfo} base={base} />
-      {positionInfo && (
-        <InfoModal
-          props={positionInfo}
-          isShowModal={showModal}
-          setShowModal={setShowModal}
-        />
-      )}
+    <div className="wrapper">
+      <div className="container">
+        <h2 className="text-center">Запчасти</h2>
+        <TableBase handleDataInfo={handleDataInfo} base={base} />
+        {positionInfo && (
+          <InfoModal
+            props={positionInfo}
+            isShowModal={showModal}
+            setShowModal={setShowModal}
+          />
+        )}
+      </div>
     </div>
   );
 }

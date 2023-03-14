@@ -14,42 +14,44 @@ function Header() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
-        <Link to="/" className="navbar-brand">
-          Second Hand Parts
-        </Link>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {isAuth ? (
-              <>
-                <NavLink
-                  to="/profile"
-                  className={({ isActive }) => styleNavLink(isActive)}
-                >
-                  Профиль
-                </NavLink>
-                <NavLink
-                  to="/add-position"
-                  className={({ isActive }) => styleNavLink(isActive)}
-                >
-                  Добавить позицию
-                </NavLink>
-                <NavLink
-                  to="/base"
-                  className={({ isActive }) => styleNavLink(isActive)}
-                >
-                 Запчасти
-                </NavLink>
-              </>
-            ) : null}
-          </Nav>
+    <div className="header">
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Link to="/" className="navbar-brand">
+            Second Hand Parts
+          </Link>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {isAuth ? (
+                <>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Профиль
+                  </NavLink>
+                  <NavLink
+                    to="/add-position"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Добавить позицию
+                  </NavLink>
+                  <NavLink
+                    to="/base"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Запчасти
+                  </NavLink>
+                </>
+              ) : null}
+            </Nav>
 
-          <Nav>{isAuth ? <LogOut /> : <AuthSidebar />}</Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            <Nav>{isAuth ? <LogOut /> : <AuthSidebar />}</Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </div>
   );
 }
 

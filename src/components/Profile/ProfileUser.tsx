@@ -38,7 +38,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="card mt-5">
+    <div className="card">
       <h2 className="text-center">Профиль</h2>
       <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
         <div className="row mb-3">

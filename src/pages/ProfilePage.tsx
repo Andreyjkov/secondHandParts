@@ -23,23 +23,25 @@ function ProfilePage() {
   };
 
   return (
-    <div className="container">
-      <ProfileUser />
+    <div className="wrapper">
+      <div className="container">
+        <ProfileUser />
 
-      <div className="card mt-5 pb-2">
-        <h2 className="text-center">Изменить позиции</h2>
-        {ownBase && (
-          <TableBase base={ownBase} handleDataInfo={handleDataInfo} />
+        <div className="card mt-1 pb-2">
+          <h2 className="text-center">Изменить позиции</h2>
+          {ownBase && (
+            <TableBase base={ownBase} handleDataInfo={handleDataInfo} />
+          )}
+        </div>
+
+        {product && (
+          <ModalUpdate
+            props={product}
+            isShowModal={showModal}
+            setShowModal={setShowModal}
+          />
         )}
       </div>
-
-      {product && (
-        <ModalUpdate
-          props={product}
-          isShowModal={showModal}
-          setShowModal={setShowModal}
-        />
-      )}
     </div>
   );
 }

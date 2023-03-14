@@ -9,7 +9,7 @@ interface ITableBase {
 
 function TableBase(props: ITableBase) {
   return (
-    <Table responsive className="table-striped">
+    <Table responsive className="table-striped table-hover">
       <thead>
         <tr>
           <th>Бренд</th>

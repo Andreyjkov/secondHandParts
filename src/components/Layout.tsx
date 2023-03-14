@@ -28,7 +28,6 @@ function Layout() {
       if (!user) return dispatch(setIsLoading(false));
 
       if (user.email && (isVerification || user.emailVerified)) {
-        dispatch(setIsAuth(true));
         await dataBase();
         dispatch(setIsLoading(false));
         const userData = (await getUserFirebase(
@@ -36,6 +35,7 @@ function Layout() {
           user.email
         )) as IUserData;
         dispatch(setUser(userData));
+        dispatch(setIsAuth(true));
       }
     });
   }, [auth, dispatch, isVerification]);
