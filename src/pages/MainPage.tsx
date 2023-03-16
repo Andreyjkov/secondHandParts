@@ -5,6 +5,7 @@ import { useAppSelector } from "../store";
 function MainPage() {
   const { isAuth } = useAppSelector((state) => state.auth);
   const { name } = useAppSelector((store) => store.user);
+
   return (
     <div className="wrapper">
       <div className="container mt-5">
