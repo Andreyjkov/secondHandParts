@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { IFormAuth } from "../../interface";
 import { useAppDispatch } from "../../store";
 import { setIsAuth } from "../../store/sliceAuth";
-
+import { useState } from "react";
 
 interface ILogin {
   handleFormSwitcher: () => void;
@@ -15,6 +15,7 @@ interface ILogin {
 export function Login({ handleFormSwitcher }: ILogin) {
   const auth = getAuth();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -24,19 +25,39 @@ export function Login({ handleFormSwitcher }: ILogin) {
   } = useForm<IFormAuth>();
 
   const handleLogin = ({ email, password }: IFormAuth) => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        dispatch(setIsAuth(true));
-        toast.success("Вход выполнен успешно!", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        console.log("user", user.emailVerified);
+
+        if (user.emailVerified) {
+          dispatch(setIsAuth(true));
+          toast.success("Вход выполнен успешно!", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          setLoading(false);
+        } else {
+          toast.info(
+            "Мы отправили Вам письмо. Пожалуйста, проверьте Вашу почту.",
+            {
+              position: "top-center",
+              autoClose: false,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        }
       })
       .catch((error) => {
         console.error(error.code);
@@ -58,6 +79,7 @@ export function Login({ handleFormSwitcher }: ILogin) {
           progress: undefined,
           theme: "light",
         });
+        setLoading(false);
       });
   };
 
@@ -94,9 +116,21 @@ export function Login({ handleFormSwitcher }: ILogin) {
       </div>
 
       <div className="d-grid gap-2 mt-3">
-        <button type="submit" className="btn btn-primary">
-          Войти
-        </button>
+        {loading ? (
+          <button className="btn btn-primary" type="button" disabled>
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Загрузка...
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-primary">
+            Войти
+          </button>
+        )}
+
         <p>
           Еще не зарегистрированы?{" "}
           <Link to={"#"} onClick={handleFormSwitcher} className={"link"}>
