@@ -6,11 +6,13 @@ import { useAppDispatch, useAppSelector } from "../store";
 import { setIsLoading } from "../store/sliceApp";
 import { setIsAuth } from "../store/sliceAuth";
 import { setBase } from "../store/sliceBase";
-import { setUser } from "../store/sliceUser";
+import { setPhotoURL, setUser } from "../store/sliceUser";
 import { IUserData } from "../interface";
 import { getAllDataFirebase, getUserFirebase } from "../services";
 import Header from "./Header";
 import Spinner from "./Spinner";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 
 function Layout() {
   const auth = getAuth();
@@ -36,6 +38,14 @@ function Layout() {
         )) as IUserData;
         dispatch(setUser(userData));
         dispatch(setIsAuth(true));
+
+        getDownloadURL(ref(storage, `/avatars/${user.email}/avatar.jpg`))
+          .then((url) => {
+            dispatch(setPhotoURL(url));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
   }, [auth, dispatch, isVerification]);
@@ -49,3 +59,6 @@ function Layout() {
 }
 
 export default Layout;
+function setTestFoto(url: string) {
+  throw new Error("Function not implemented.");
+}

@@ -6,6 +6,7 @@ const initialState = {
   email: '',
   name: '',
   phone: '',
+  photoURL: ''
 };
 
 const sliceUser = createSlice({
@@ -17,14 +18,18 @@ const sliceUser = createSlice({
       state.name = action.payload.name;
       state.phone = action.payload.phone;
     },
+    setPhotoURL(state, action: PayloadAction<string>) {
+      state.photoURL = action.payload;
+    },
     removeUser(state) {
       state.email = '';
       state.name = '';
       state.phone = '';
+      state.photoURL = ''
     },
   },
 });
 
-export const { setUser, removeUser } = sliceUser.actions;
+export const { setUser, removeUser, setPhotoURL } = sliceUser.actions;
 
 export default sliceUser.reducer;

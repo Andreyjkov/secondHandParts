@@ -8,7 +8,8 @@ export interface IFormAuth {
 export interface IUserData {
   email: string;
   name: string;
-  phone: string
+  phone: string;
+  photoURL?: string
 }
 
 export interface IBaseData {

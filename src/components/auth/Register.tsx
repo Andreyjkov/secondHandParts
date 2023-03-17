@@ -12,6 +12,7 @@ import { setUserFirebase } from "../../services";
 import { useAppDispatch } from "../../store";
 import { setIsVerification } from "../../store/sliceAuth";
 import { IFormAuth, IUserData } from "../../interface";
+import { useState } from "react";
 
 interface IRegister {
   handleFormSwitcher: () => void;
@@ -20,6 +21,7 @@ interface IRegister {
 export function Register({ handleFormSwitcher }: IRegister) {
   const auth = getAuth();
   const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -29,6 +31,7 @@ export function Register({ handleFormSwitcher }: IRegister) {
   } = useForm<IFormAuth>();
 
   const handleRegister = ({ email, name, password, phone }: IFormAuth) => {
+    setLoading(true);
     const userFormInfo = { email, name, phone };
 
     const autoVerification = (user: User, userFormInfo: IUserData) => {
@@ -38,6 +41,7 @@ export function Register({ handleFormSwitcher }: IRegister) {
           user.reload();
           autoVerification(user, userFormInfo);
         } else {
+          setLoading(false);
           toast.dismiss();
           dispatch(setIsVerification(user.emailVerified));
           setUserFirebase(userFormInfo);
@@ -66,6 +70,7 @@ export function Register({ handleFormSwitcher }: IRegister) {
         });
       })
       .catch((error) => {
+        setLoading(false);
         console.error(error.code);
         let msgErorr: string = error.code;
         if (error.code === "auth/email-already-in-use") {
@@ -142,9 +147,20 @@ export function Register({ handleFormSwitcher }: IRegister) {
       </div>
 
       <div className="d-grid gap-2 mt-3">
-        <button type="submit" className="btn btn-primary">
-          Зарегистрироваться
-        </button>
+        {loading ? (
+          <button className="btn btn-primary" type="button" disabled>
+            <span
+              className="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Загрузка...
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-primary">
+            Зарегистрироваться
+          </button>
+        )}
         <p>
           Уже зарегистрированы?{" "}
           <Link to={"#"} onClick={handleFormSwitcher}>

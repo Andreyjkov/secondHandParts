@@ -1,6 +1,4 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 import { AuthSidebar, LogOut } from "./";
@@ -8,6 +6,7 @@ import { useAppSelector } from "../store";
 
 function Header() {
   const { isAuth } = useAppSelector((state) => state.auth);
+  const { photoURL } = useAppSelector((store) => store.user);
 
   const styleNavLink = (isActive: boolean) => {
     return isActive ? "active nav-link" : "nav-link";
@@ -46,8 +45,16 @@ function Header() {
                 </>
               ) : null}
             </Nav>
-
-            <Nav>{isAuth ? <LogOut /> : <AuthSidebar />}</Nav>
+            <Nav>
+              {isAuth ? <LogOut /> : <AuthSidebar />}
+              {photoURL && (
+                <img
+                  src={photoURL}
+                  className="header-avatar rounded-circle"
+                  alt="avatar"
+                />
+              )}
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
