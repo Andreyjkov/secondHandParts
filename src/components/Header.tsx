@@ -1,6 +1,4 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 import { AuthSidebar, LogOut } from "./";
@@ -21,41 +19,43 @@ function Header() {
           <Link to="/" className="navbar-brand">
             Second Hand Parts
           </Link>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto">
-                {isAuth ? (
-                  <>
-                    <NavLink
-                      to="/profile"
-                      className={({ isActive }) => styleNavLink(isActive)}
-                    >
-                      Профиль
-                    </NavLink>
-                    <NavLink
-                      to="/add-position"
-                      className={({ isActive }) => styleNavLink(isActive)}
-                    >
-                      Добавить позицию
-                    </NavLink>
-                    <NavLink
-                      to="/base"
-                      className={({ isActive }) => styleNavLink(isActive)}
-                    >
-                      Запчасти
-                    </NavLink>
-                  </>
-                ) : null}
-              </Nav>
-              <Nav>{isAuth ? <LogOut /> : <AuthSidebar />}</Nav>
-            </Navbar.Collapse>
-            {photoURL && (
-              <img
-                src={photoURL}
-                className="header-avatar rounded-circle"
-                alt="avatar"
-              />
-            )}
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {isAuth ? (
+                <>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Профиль
+                  </NavLink>
+                  <NavLink
+                    to="/add-position"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Добавить позицию
+                  </NavLink>
+                  <NavLink
+                    to="/base"
+                    className={({ isActive }) => styleNavLink(isActive)}
+                  >
+                    Запчасти
+                  </NavLink>
+                </>
+              ) : null}
+            </Nav>
+            <Nav>
+              {isAuth ? <LogOut /> : <AuthSidebar />}
+              {photoURL && (
+                <img
+                  src={photoURL}
+                  className="header-avatar rounded-circle"
+                  alt="avatar"
+                />
+              )}
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </div>
