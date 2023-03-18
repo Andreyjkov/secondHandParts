@@ -3,10 +3,13 @@ import { Link, NavLink } from "react-router-dom";
 
 import { AuthSidebar, LogOut } from "./";
 import { useAppSelector } from "../store";
+import { useState } from "react";
 
 function Header() {
   const { isAuth } = useAppSelector((state) => state.auth);
   const { photoURL } = useAppSelector((store) => store.user);
+
+  const [openCollapse, setOpenCollapse] = useState(false);
 
   const styleNavLink = (isActive: boolean) => {
     return isActive ? "active nav-link" : "nav-link";
@@ -16,12 +19,12 @@ function Header() {
     <div className="header">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Link to="/" className="navbar-brand">
+          <Link to="/" className="navbar-brand" onClick={() => setOpenCollapse(false)}>
             Second Hand Parts
           </Link>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+          <Navbar.Toggle onClick={() => setOpenCollapse(!openCollapse)} />
+          <Navbar.Collapse in={openCollapse}>
+            <Nav className="me-auto" onClick={() => setOpenCollapse(false)}>
               {isAuth ? (
                 <>
                   <NavLink
@@ -45,7 +48,7 @@ function Header() {
                 </>
               ) : null}
             </Nav>
-            <Nav>
+            <Nav onClick={() => setOpenCollapse(false)}>
               {isAuth ? <LogOut /> : <AuthSidebar />}
               {photoURL && (
                 <img

@@ -28,7 +28,6 @@ export function Login({ handleFormSwitcher }: ILogin) {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log("user", user.emailVerified);
 
         if (user.emailVerified) {
           dispatch(setIsAuth(true));
