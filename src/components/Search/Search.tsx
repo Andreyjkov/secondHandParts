@@ -1,18 +1,18 @@
 import React from "react";
 
 interface Props {
-  filterText: string;
-  onFilterTextChange: React.Dispatch<React.SetStateAction<string>>;
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Search({ filterText, onFilterTextChange }: Props) {
+function Search({ searchText, setSearchText }: Props) {
   return (
-    <form>
+    <form onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
-        value={filterText}
+        value={searchText}
         placeholder="Поиск..."
-        onChange={(e) => onFilterTextChange(e.target.value)}
+        onChange={(e) => setSearchText(e.target.value)}
       />
     </form>
   );

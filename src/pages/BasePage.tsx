@@ -12,7 +12,7 @@ function BasePage() {
 
   const [positionInfo, setPositionInfo] = useState<IBaseData>();
   const [showModal, setShowModal] = useState(false);
-  const [SearchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   const handleDataInfo = (data: IBaseData) => {
     setPositionInfo(data);
@@ -21,10 +21,10 @@ function BasePage() {
 
   const filteredBase = base.filter((item) => {
     return (
-      item.brand.toLowerCase().includes(SearchText.toLowerCase()) ||
-      item.model.toLowerCase().includes(SearchText.toLowerCase()) ||
-      item.parts.toLowerCase().includes(SearchText.toLowerCase()) ||
-      item.description.toLowerCase().includes(SearchText.toLowerCase())
+      item.brand.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.model.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.parts.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchText.toLowerCase())
     );
   });
 
@@ -33,7 +33,7 @@ function BasePage() {
     <div className="wrapper">
       <div className="container">
         <h2 className="text-center">Запчасти</h2>
-        <Search filterText={SearchText} onFilterTextChange={setSearchText} />
+        <Search searchText={searchText} setSearchText={setSearchText} />
         {filteredBase.length === 0 ? (
           <span className="">Совпадений не найдено</span>
         ) : (
