@@ -59,6 +59,3 @@ function Layout() {
 }
 
 export default Layout;
-function setTestFoto(url: string) {
-  throw new Error("Function not implemented.");
-}
